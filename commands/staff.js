@@ -1,8 +1,8 @@
 const Discord = require("discord.js");
 
 module.exports = {
-    name: 'help',
-    description: 'Replies with help stuff.',
+    name: 'staff',
+    description: 'Lists current staff',
     permissions: null,
     deletable: false,
     async execute(message, args, client, info, functions) {

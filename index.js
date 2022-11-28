@@ -37,6 +37,8 @@ client.on('messageCreate', async message => {
         try {
             await functions.executeCommand(command, message, args, client, data, functions)
         } catch (e) {
+            const errorc = client.channels.cache.find(channel => channel.id === "1046856597202292828");
+            errorc.send(e);
             console.log(e);
         }
     }
