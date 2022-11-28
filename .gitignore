@@ -1,2 +1,8 @@
-config.json
-/pp.txt
+# Dependency directories
+node_modules/
+
+# Json files
+*.json
+
+# Txt files
+*.txt
