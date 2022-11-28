@@ -5,7 +5,7 @@ module.exports = {
     description: 'Lists current staff',
     permissions: null,
     deletable: false,
-    async execute(message, args, client, info, functions) {
+    async execute(client, message, args) {
         await message.channel.send({ embeds: [{
             color: 0x9d58b6,
             title: "Staff members",

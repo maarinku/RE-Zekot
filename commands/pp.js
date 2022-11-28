@@ -6,7 +6,7 @@ module.exports = {
     description: 'Replies with your pp size.',
     permissions: null,
     deletable: false,
-    async execute(message, args, client, info, functions) {
+    async execute(client, message, args) {
         function getPp(file) {
             var dat = fs.readFileSync(file, "utf8");
             var lines = dat.split("\n");
