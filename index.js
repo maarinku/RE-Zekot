@@ -17,6 +17,8 @@ const client = new Client({ intents: [
     GatewayIntentBits.GuildWebhooks
 ]});
 
+functions.loadCommands(client);
+
 client.on('ready', () => {
     console.log('Online!');
 });
@@ -24,22 +26,20 @@ client.on('ready', () => {
 client.on('messageCreate', async message => {
     if (message.author.bot) return;
     if (!message.content.startsWith(prefix)) return;
-
-    if (functions.msg.length >= 1) {
-        functions.msg.length = 0
-    }
-    functions.msg.push(message);
-
+    
     const args = (message.content.slice(prefix.length).trim().split(/ +/));
     const command = args.shift().toLowerCase();
 
+    if(!client.commands.has(command)) return;
+    const cmd = client.commands.get(command);
+
     if (command) {
         try {
-            await functions.executeCommand(command, message, args, client, data, functions)
+            await cmd.execute(client, message, args);
         } catch (e) {
             const errorc = client.channels.cache.find(channel => channel.id === "1046856597202292828");
             errorc.send(e);
-            console.log(e);
+            console.log(`\x1b[31m${message.author.tag} (${message.author.id}) ran ${config.prefix}${cmd.name}\x1b[39m\n\tError encountered: ${e}`);
         }
     }
 });

@@ -1,24 +1,20 @@
 const Discord = require("discord.js");
 const fs = require('fs');
-let msg = [];
 
-async function executeCommand(command, message, args, client, info, functions) {
+async function loadCommands(client) {
     client.commands = new Discord.Collection();
-    const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
-    for (const file of commandFiles) {
-        if (file == `${command}.js`) {
+    fs.readdir(`./commands/`, (error, files) => {
+        if(error) throw `Error loading commands: ${error}`;
+
+            files.forEach(file => {
+            if(!file.endsWith(`.js`)) return;
+
             const cmd = require(`./commands/${file}`);
-            try{
-                client.commands.set(cmd.name, cmd, client);
-                await client.commands.get(cmd.name).execute(message, args, client, info, functions);
-                if (cmd.deletable == true) {
-                    await message.delete();
-                }
-            } catch (e) {
-                console.log(e);
-            }
-        }
-    }
+            client.commands.set(cmd.name, cmd);
+
+            console.log(`Loading ${file} as ${cmd.name}`);
+        })
+    });
 }
 
-module.exports = {executeCommand, msg}
+module.exports = {loadCommands}
