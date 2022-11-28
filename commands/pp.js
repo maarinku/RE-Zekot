@@ -12,7 +12,7 @@ module.exports = {
             var lines = dat.split("\n");
             return lines[Math.floor(Math.random()*lines.length)];
         }
-        var ppsize = getPp("commands/pp.txt");
+        var ppsize = getPp("pp.txt");
         await message.channel.send({ embeds: [{
             color: 0x9d58b6,
             title: "",
