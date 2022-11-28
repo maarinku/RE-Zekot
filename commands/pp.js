@@ -18,6 +18,5 @@ module.exports = {
             title: "",
             description: `${message.author}'s pp size:\n**${ppsize}**`
           }]});
-        
     }
 }
