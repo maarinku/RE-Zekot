@@ -37,8 +37,6 @@ client.on('messageCreate', async message => {
         try {
             await cmd.execute(client, message, args);
         } catch (e) {
-            const errorc = client.channels.cache.find(channel => channel.id === "1046856597202292828");
-            errorc.send(e);
             console.log(`\x1b[31m${message.author.tag} (${message.author.id}) ran ${config.prefix}${cmd.name}\x1b[39m\n\tError encountered: ${e}`);
         }
     }
